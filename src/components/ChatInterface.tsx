@@ -4,6 +4,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import styles from './ChatInterface.module.css';
 import { Agent, Message, AgentId, Conversation } from '@/types';
 import Sidebar from './Sidebar';
+import MarkdownRenderer from './MarkdownRenderer';
 
 const AGENTS: Agent[] = [
     {
@@ -234,27 +235,6 @@ export default function ChatInterface() {
 
     const getAgentById = (id: AgentId) => AGENTS.find(a => a.id === id);
 
-    const renderMarkdown = (content: string) => {
-        // Simple markdown rendering (you can enhance this or use a library like react-markdown)
-        return content
-            .split('\n')
-            .map((line, i) => {
-                if (line.startsWith('# ')) {
-                    return <h1 key={i}>{line.slice(2)}</h1>;
-                } else if (line.startsWith('## ')) {
-                    return <h2 key={i}>{line.slice(3)}</h2>;
-                } else if (line.startsWith('### ')) {
-                    return <h3 key={i}>{line.slice(4)}</h3>;
-                } else if (line.startsWith('- ')) {
-                    return <li key={i}>{line.slice(2)}</li>;
-                } else if (line.trim() === '') {
-                    return <br key={i} />;
-                } else {
-                    return <p key={i}>{line}</p>;
-                }
-            });
-    };
-
     return (
         <>
             <Sidebar
@@ -375,7 +355,7 @@ export default function ChatInterface() {
                                                 </div>
                                             </div>
                                             <div className={styles.messageContent}>
-                                                {renderMarkdown(response.content)}
+                                                <MarkdownRenderer content={response.content} />
                                             </div>
                                         </div>
                                     </div>
@@ -409,7 +389,7 @@ export default function ChatInterface() {
                                     )}
                                 </div>
                                 <div className={styles.messageContent} style={{ color: '#333', fontSize: 15, lineHeight: 1.7 }}>
-                                    {renderMarkdown(msg.content)}
+                                    <MarkdownRenderer content={msg.content} />
                                 </div>
                             </div>
                         </div>
