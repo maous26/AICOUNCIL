@@ -370,8 +370,8 @@ export default function ChatInterface() {
                             key={msg.id}
                             className={styles.messageWrapper}
                             style={{
-                                background: '#f0fff0',
-                                border: '1px solid #c8e6c8',
+                                background: 'rgba(16, 185, 129, 0.1)',
+                                border: '1px solid rgba(16, 185, 129, 0.3)',
                                 borderRadius: '8px',
                                 padding: '20px',
                                 margin: '16px 0'
@@ -379,7 +379,7 @@ export default function ChatInterface() {
                         >
                             <div className={styles.contentWrapper}>
                                 <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12 }}>
-                                    <span style={{ color: '#2d8a2d', fontSize: 12, fontWeight: 600 }}>
+                                    <span style={{ color: '#10b981', fontSize: 12, fontWeight: 600 }}>
                                         Council Consensus
                                     </span>
                                     {msg.metadata && (
@@ -388,7 +388,7 @@ export default function ChatInterface() {
                                         </span>
                                     )}
                                 </div>
-                                <div className={styles.messageContent} style={{ color: '#333', fontSize: 15, lineHeight: 1.7 }}>
+                                <div className={styles.messageContent}>
                                     <MarkdownRenderer content={msg.content} />
                                 </div>
                             </div>

@@ -43,6 +43,7 @@
 .paragraph {
   margin: 0.8rem 0;
   line-height: 1.7;
+  color: var(--text-primary);
 }
 
 .paragraph:first-child {
@@ -57,11 +58,13 @@
 .ul, .ol {
   margin: 1rem 0;
   padding-left: 2rem;
+  color: var(--text-primary);
 }
 
 .li {
   margin: 0.5rem 0;
   line-height: 1.6;
+  color: var(--text-primary);
 }
 
 .li > .paragraph {
@@ -76,13 +79,14 @@
 
 /* Code */
 .inlineCode {
-  background: rgba(99, 102, 241, 0.1);
-  border: 1px solid rgba(99, 102, 241, 0.2);
+  background: rgba(99, 102, 241, 0.15);
+  border: 1px solid rgba(99, 102, 241, 0.3);
   border-radius: 4px;
   padding: 0.2em 0.4em;
   font-family: 'Consolas', 'Monaco', 'Courier New', monospace;
   font-size: 0.9em;
-  color: #e06c75;
+  color: #c678dd;
+  font-weight: 500;
 }
 
 .codeBlock {
