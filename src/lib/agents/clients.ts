@@ -51,34 +51,29 @@ export class PerplexityClient extends AgentClient {
   }
 }
 
-// Gemini Client
+// Gemini Client (via OpenRouter - no Google API key needed!)
 export class GeminiClient extends AgentClient {
   async execute(prompt: string, systemPrompt: string): Promise<string> {
-    const apiKey = process.env.GOOGLE_GENERATIVE_AI_API_KEY;
+    const apiKey = process.env.OPENROUTER_API_KEY;
     if (!apiKey) {
-      throw new Error('Google API key not configured');
+      throw new Error('OpenRouter API key not configured');
     }
 
-    const model = this.config.model || 'gemini-2.0-flash-exp';
-    const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
-
-    const response = await fetch(url, {
+    const response = await fetch(OPENROUTER_API_URL, {
       method: 'POST',
       headers: {
+        'Authorization': `Bearer ${apiKey}`,
         'Content-Type': 'application/json',
+        'HTTP-Referer': process.env.NEXT_PUBLIC_SITE_URL || 'http://localhost:3000',
+        'X-Title': 'AI Council'
       },
       body: JSON.stringify({
-        system_instruction: {
-          parts: [{ text: systemPrompt }]
-        },
-        contents: [
-          {
-            parts: [{ text: prompt }]
-          }
+        model: this.config.model || 'google/gemini-pro-1.5',
+        messages: [
+          { role: 'user', content: prompt }
         ],
-        generationConfig: {
-          temperature: this.config.temperature || 0.5,
-        }
+        system: systemPrompt,
+        temperature: this.config.temperature || 0.5,
       }),
     });
 
@@ -88,7 +83,7 @@ export class GeminiClient extends AgentClient {
     }
 
     const data = await response.json();
-    return data.candidates?.[0]?.content?.parts?.[0]?.text || 'No response generated.';
+    return data.choices?.[0]?.message?.content || 'No response generated.';
   }
 }
 

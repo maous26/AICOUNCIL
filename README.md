@@ -38,9 +38,8 @@ Each agent has a distinct role and expertise:
 - **Language**: TypeScript
 - **Styling**: CSS Modules with CSS Variables
 - **AI APIs**:
-  - OpenRouter (GPT-4, Claude)
+  - OpenRouter (GPT-4, Claude, Gemini)
   - Perplexity AI
-  - Google Generative AI (Gemini)
 
 ## Architecture
 
@@ -73,9 +72,8 @@ src/
 ### Prerequisites
 - Node.js 18+
 - API keys for:
-  - OpenRouter (for GPT-4 and Claude)
+  - OpenRouter (for GPT-4, Claude, and Gemini)
   - Perplexity AI
-  - Google Generative AI (Gemini)
 
 ### Installation
 
@@ -99,8 +97,9 @@ src/
    ```env
    OPENROUTER_API_KEY=sk-or-v1-...
    PERPLEXITY_API_KEY=pplx-...
-   GOOGLE_GENERATIVE_AI_API_KEY=AIza...
    ```
+
+   **Note**: Gemini is now accessed via OpenRouter, so you only need 2 API keys!
 
 5. Run the development server:
    ```bash
